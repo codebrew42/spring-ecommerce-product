@@ -47,29 +47,29 @@
   - [] (optional) custom function to handle `MethodArgumentNotValidException` in GlobalControllerAdvice 
 
 ### Step 2.2: clients can register and login as a user
-- [ ] **User registration feature**
-  - [ ] Accept email and password in JSON format
-  - [ ] Validate email format and password requirements
-  - [ ] Generate and return JWT access token upon successful registration
-  - [ ] Store user credentials securely in database (hash passwords)
-- [ ] **User login feature**
-  - [ ] Accept email and password credentials
-  - [ ] Verify credentials against registered users
-  - [ ] Issue JWT token for authenticated users
-  - [ ] Include user claims (id, name, role) in token
-- [ ] **JWT token management**
-  - [ ] Add JJWT library dependency
-  - [ ] Generate secure tokens with configurable expiration
-  - [ ] Implement token validation for protected endpoints
-  - [ ] Create token service for generation and verification
-- [ ] **Database design**
-  - [ ] Create `members` table with id, email, password, name, role columns
-  - [ ] Create `MemberRepository` with JDBC operations
-  - [ ] Create `Member` domain model and `MemberRequest` DTO
-- [ ] **Authentication error handling**
-  - [ ] Return `401 Unauthorized` for missing header, invalid tokens
-  - [ ] Return `403 Forbidden` for incorrect login attempts
-  - [ ] Provide clear error messages for authentication failures
+- [x] **User registration feature**
+  - [x] Accept email and password in JSON format
+  - [x] Validate email format and password requirements
+  - [x] Generate and return JWT access token upon successful registration
+  - [x] Store user credentials securely in database (hash passwords)
+- [x] **User login feature**
+  - [x] Accept email and password credentials
+  - [x] Verify credentials against registered users
+  - [x] Issue JWT token for authenticated users
+  - [x] Include user claims (id, name, role) in token
+- [x] **JWT token management**
+  - [x] Add JJWT library dependency
+  - [x] Generate secure tokens with configurable expiration
+  - [x] Implement token validation for protected endpoints
+  - [x] Create token service for generation and verification
+- [x] **Database design**
+  - [x] Create `members` table with id, email, password, name, role columns
+  - [x] Create `MemberRepository` with JDBC operations
+  - [x] Create `Member` domain model and `MemberRequest` DTO
+- [x] **Authentication error handling**
+  - [x] Return `401 Unauthorized` for missing header, invalid tokens
+  - [x] Return `403 Forbidden` for incorrect login attempts
+  - [x] Provide clear error messages for authentication failures
 
 ### Step 2.3: authorized users can add products to their cart
 - [ ] **User authentication integration**

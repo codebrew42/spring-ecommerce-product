@@ -1,0 +1,3 @@
+jwt:
+  secret: Rspdt22xgwoGJV3uBtpy58RfqiuhfJ4E8ggAbeUkXVFfaHNBlZkJ8XeDxDPoJ8d3oIVNd+O59TnwS5odN6mQZw==
+  expiration: 8640000 # 10 days in milliseconds

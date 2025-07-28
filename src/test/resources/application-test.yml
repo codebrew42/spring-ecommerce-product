@@ -1,0 +1,31 @@
+# Test configuration
+# Uses H2 in-memory database for fast, isolated tests
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  
+  sql:
+    init:
+      # Use schema.sql and test-data.sql for test database setup
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:test-data.sql
+      mode: always
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none  # Use schema.sql instead
+
+logging:
+  level:
+    org.springframework.jdbc: DEBUG
+    org.springframework.transaction: DEBUG

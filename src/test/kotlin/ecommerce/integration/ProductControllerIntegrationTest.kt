@@ -1,4 +1,4 @@
-package ecommerce.controller
+package ecommerce.integration
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -96,7 +96,9 @@ class ProductControllerIntegrationTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["hi!", "percent%", "back\\slash", "curly{}", "hi@", "hi#", "tilda~", "emoji🙂", "korean한글", "comm,a"])
+    @ValueSource(
+        strings = ["hi!", "pct%", "bck\\slash", "crly{}", "hi@", "hi#", "tlda~", "emji🙂", "korean한글", "comm,a"],
+    )
     fun `should throw - invalid names with not allowed special characters`(invalidName: String) {
         val request = """{
             "name": "$invalidName",

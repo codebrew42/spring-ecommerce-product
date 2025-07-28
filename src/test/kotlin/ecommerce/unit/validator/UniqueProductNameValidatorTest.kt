@@ -1,6 +1,6 @@
-package ecommerce.controller
+package ecommerce.unit.validator
 
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
@@ -33,7 +33,7 @@ class UniqueProductNameValidatorTest {
                 String::class.java,
             )
 
-        assertThat(response.statusCode).isEqualTo(HttpStatus.CREATED)
+        Assertions.assertThat(response.statusCode).isEqualTo(HttpStatus.CREATED)
         // second product (duplicate) - should throw
         val duplicateResponse =
             testRestTemplate.postForEntity(
@@ -41,6 +41,6 @@ class UniqueProductNameValidatorTest {
                 HttpEntity(validRequest, header),
                 String::class.java,
             )
-        assertThat(duplicateResponse.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
+        Assertions.assertThat(duplicateResponse.statusCode).isEqualTo(HttpStatus.BAD_REQUEST)
     }
 }

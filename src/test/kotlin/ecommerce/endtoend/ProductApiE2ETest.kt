@@ -1,17 +1,27 @@
-package ecommerce.controller
+package ecommerce.endtoend
 
 import ecommerce.model.Product
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.http.HttpStatus
 import org.springframework.test.annotation.DirtiesContext
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-class ProductControllerTest {
+class ProductApiE2ETest {
+    @LocalServerPort
+    private var port: Int = 0
+
+    @BeforeEach
+    fun setUp() {
+        RestAssured.port = port
+    }
+
     @Test
     fun getProducts() {
         val response =
@@ -23,7 +33,7 @@ class ProductControllerTest {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value())
         val names = response.body().jsonPath().getList<String>("name")
         assertThat(names).isNotEmpty()
-        assertThat(names.size).isEqualTo(5)
+        assertThat(names.size).isEqualTo(2)
     }
 
     @Test
