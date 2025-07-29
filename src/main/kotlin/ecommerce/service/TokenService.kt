@@ -9,6 +9,12 @@ import org.springframework.stereotype.Service
 import java.util.Date
 import javax.crypto.SecretKey
 
+/**
+ * Service for JWT token operations
+ * Implements Step 2-2 requirement: JWT token generation and validation
+ * Uses JJWT library for secure token creation and parsing
+ * Configured via application.properties for secret key and expiration time
+ */
 @Service
 class TokenService(
     @Value("\${jwt.secret}") private val secretKey: String,
@@ -16,6 +22,13 @@ class TokenService(
 ) {
     private val key: SecretKey = Keys.hmacShaKeyFor(secretKey.toByteArray())
 
+    /**
+     * Generates JWT token containing member information
+     * Uses member ID as subject for token identification
+     * Includes custom claims for email, role, and name for authorization
+     * Sets issued at and expiration dates for token lifecycle management
+     * Signs with HMAC-SHA256 using configured secret key
+     */
     fun generateToken(member: Member): String {
         val now = Date()
         val expiryDate = Date(now.time + expiration)
@@ -31,6 +44,13 @@ class TokenService(
             .compact()
     }
 
+    /**
+     * Validates JWT token and extracts claims
+     * Parses token using same secret key used for signing
+     * Returns Claims object with subject and custom claims if valid
+     * Catches all exceptions (expired, invalid signature, malformed) and returns null
+     * Used by authentication interceptors and argument resolvers
+     */
     fun validateToken(token: String): Claims? {
         return try {
             Jwts.parser()
@@ -43,6 +63,13 @@ class TokenService(
         }
     }
 
+    /**
+     * Extracts member ID from JWT token
+     * Uses validateToken() to ensure token is valid before extraction
+     * Converts subject claim (stored as String) to Long for database lookups
+     * Returns null if token is invalid or subject cannot be parsed as Long
+     * Commonly used by authentication mechanisms to identify the current user
+     */
     fun extractMemberId(token: String): Long? {
         val claims = validateToken(token)
         return claims?.subject?.toLongOrNull()
