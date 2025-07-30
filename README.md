@@ -209,6 +209,15 @@ Content-Type: application/json
       - [] check: add `fun findOption`
   - [] 2.CartItem
     - [] val id: Long = 0, val memberId = UUID,... 
+```aiignore
+data class Cart(
+    val id: Long? = null, //TODO: 0
+    val memberId: Long, //TODO: consider `UUID`
+    val productId: Long,
+    val quantity: Int,
+    val addedAt: LocalDateTime? = null,
+)
+```
   - [] 3.Member
   - [] 4.ProductOption
     - `class productOption(var id: Long, var name: String, var price: Double, var img: String, var quantity: Int)`
