@@ -51,7 +51,7 @@ class ProductController(private val productRepository: ProductRepository) {
      * Implements POST /api/products endpoint for product creation
      * Uses @Valid annotation to trigger Step 2-1 validation rules:
      * - Product name: max 15 chars, specific special chars allowed, unique
-     * - Product price: must be > 0  
+     * - Product price: must be > 0
      * - Product imageUrl: must start with http:// or https://
      * Returns 201 Created with Location header pointing to new resource
      * Automatically generates ID via H2 database auto-increment
